@@ -5,7 +5,7 @@ var glimpse = function(document){ "use strict";
 	var classNames = {
 		base: "preview", // Added to every element
 		monochrome: "monochrome", // Added to monochrome images
-	};	
+	};
 
 	// WARNING: Changing following variables might break the library, proceed with caution.
 	var type = "image/jpeg";
@@ -60,7 +60,19 @@ var glimpse = function(document){ "use strict";
 		canvas: imageToCanvas,
 		image: imageToImg,
 		meta: getImageMeta,
-		get support(){ return !!getContext(createImage(tagCanvas)) }
+		get support(){ return !!getContext(createImage(tagCanvas)) },
+		limit: limit,
+		hexIndex: hexIndex,
+		keyIndex: keyIndex,
+		map: map,
+		resize: resize,
+		channelToKey: channelToKey,
+		keyToChannel: keyToChannel,
+		getAverageColor: getAverageColor,
+		channelToHex: channelToHex,
+		hexToMonochrome: hexToMonochrome,
+  	createImage: createImage
+
 	};
 
 
@@ -82,8 +94,8 @@ var glimpse = function(document){ "use strict";
 
 			var result = []; // Here go the keys
 			var a = 0, b = 0, c = 0;
-			var colorIndex = [ 0, 0, 0 ]; // 
-			var count = 0; // 
+			var colorIndex = [ 0, 0, 0 ]; //
+			var count = 0; //
 
 			if (!monochrome){
 
@@ -154,24 +166,24 @@ var glimpse = function(document){ "use strict";
 	}
 
 	// Pass a base64-encoded image to the callback
-	function imageToBase64(string, callback, width, height){ 
-		decodeImage(string, callback, width, height); 
+	function imageToBase64(string, callback, width, height){
+		decodeImage(string, callback, width, height);
 	}
 
 	// Pass a canvas-element image to the callback
-	function imageToCanvas(string, callback, width, height){ 
+	function imageToCanvas(string, callback, width, height){
 		decodeImage(string, callback, width, height, tagCanvas);
 	}
 
 	// Pass an img-element to the callback
-	function imageToImg(string, callback, width, height){ 
+	function imageToImg(string, callback, width, height){
 		decodeImage(string, callback, width, height, tagImg);
-	}	
+	}
 
 	// Draw a base64-encoded jpeg-image from a data-string created by preview.encode() using canvas.
 	function decodeImage(input, callback, width, height, element){
 
-		// If a base64-encoded image is passed at this stage its expected to be optimised so it 
+		// If a base64-encoded image is passed at this stage its expected to be optimised so it
 		// won’t affect its quality or resolution.
 		if (isBase64(input)) return encodeImage(input, function(source){
 			decodeImage(source, callback, element, width, height);
@@ -192,7 +204,7 @@ var glimpse = function(document){ "use strict";
 
 		var previewWidth  = keyIndex.indexOf(data.shift());
 		var previewHeight = data.length / previewWidth; // calculate the preview’s height
-		if (meta.monochrome) previewHeight = 0|previewHeight * 3; // compensate for the smaller data.length 
+		if (meta.monochrome) previewHeight = 0|previewHeight * 3; // compensate for the smaller data.length
 
 		// Prepare a html canvas.
 		var canvas = createImage(tagCanvas, previewWidth, previewHeight);
@@ -212,12 +224,17 @@ var glimpse = function(document){ "use strict";
 			imageData.data[i+2] = a;
 			imageData.data[i+3] = 255;
 
-			imageData.data[i+4] = b; 
+
+
+
+
+
+			imageData.data[i+4] = b;
 			imageData.data[i+5] = b;
 			imageData.data[i+6] = b;
 			imageData.data[i+7] = 255;
 
-			imageData.data[i+8]  = c; 
+			imageData.data[i+8]  = c;
 			imageData.data[i+9]  = c
 			imageData.data[i+10] = c;
 			imageData.data[i+11] = 255;
@@ -234,7 +251,7 @@ var glimpse = function(document){ "use strict";
 		}
 		setData(canvas, imageData);
 
-		// Load and redraw the canvas image to its given dimensions,  
+		// Load and redraw the canvas image to its given dimensions,
 		// then pass it to the callback as a base64 encoded jpeg-image.
 		var image = createImage(tagImg);
 		image.onload = function(){
@@ -300,7 +317,7 @@ var glimpse = function(document){ "use strict";
 			var treshold = quality * 1.28;
 
 			var ratio = width / height;
-			if (ratio > 1){ 
+			if (ratio > 1){
 				width = Math.round(limit(width * resolution, 6, treshold));
 				height = Math.round(width / ratio);
 			}
@@ -374,3 +391,5 @@ var glimpse = function(document){ "use strict";
 	}
 
 }(document);
+
+module.exports = glimpse;

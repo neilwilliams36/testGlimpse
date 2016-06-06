@@ -1,0 +1,26 @@
+These test require the following:
+
+Node needs to be installed, nodejs.org.  This ensures that npm is working.
+
+Mocha needs to be installed globally:
+
+npm install -g mocha
+
+Package.json needs to initialised
+
+npm init
+
+Chai and JsDom need to be installed in development mode
+
+npm install --save-dev chai jsdom
+
+A test folder needs to be created and the two files private.js and setup.js copied
+to the folder
+
+The test are run using:
+
+npm test
+
+To run the test in continuous mode use the following (not )
+
+npm run watch

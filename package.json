@@ -1,0 +1,25 @@
+{
+  "name": "reveal-js",
+  "version": "1.0.0",
+  "description": "Reveal JS is a dependency-free image library to create image previews that load in an instant.",
+  "main": "reveal.js",
+  "scripts": {
+    "test": "mocha  --require ./test/setup.js 'test/**/*.@(js|jsx)'",
+    "watch": "mocha  --require ./test/setup.js 'test/**/*.@(js|jsx)' --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanuphoff/Reveal-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathanuphoff/Reveal-js/issues"
+  },
+  "homepage": "https://github.com/nathanuphoff/Reveal-js#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-dom": "^1.4.0",
+    "jsdom": "^9.2.1"
+  }
+}
