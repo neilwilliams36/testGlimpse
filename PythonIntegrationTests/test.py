@@ -1,11 +1,24 @@
 import unittest
+import time
 from selenium import webdriver
 
 class GlimpseTest(unittest.TestCase):
     def script(self, script):
         return self.driver.execute_script(script)
+
+    def is_available(self, tag):
+        try:
+            self.driver.find_element_by_tag_name(tag)
+            return True
+        except:
+            time.sleep(.25)
+            return False
+
     def find(self, tag):
-        return self.driver.find_element_by_tag_name(tag)
+        while True:
+            if self.is_available(tag):
+                return self.driver.find_element_by_tag_name(tag)
+                break
 
     @classmethod
     def setUpClass(self):
