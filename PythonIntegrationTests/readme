@@ -1,0 +1,23 @@
+Set up
+
+Make sure that you have Python 2.7 installed
+
+
+Ensure that all the private methods are exposed in glimpse.js
+
+Navigate to this folder
+
+Start the Server, this will take up one bash tab or dos window
+Note after repeated tests and server restarts the port may become blocked.
+If this happens restart the computer OR change the port number in both
+the server file and the test file.
+
+python server.py
+
+Run the test suit in another tab or dos window
+
+python test.py
+
+To see the tests that have been run, run the test suit in verbose mode
+
+python test.py -v

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Server</title>
+</head>
+<body>
+<h1>Python Server</h1>
+<img src='image.jpg'/>
+<script src="glimpse.js"></script>
+<script>
+var img, met, b64res, b64met, ires, imet, cres, cmet;
+var start = function(){
+
+var image = glimpse.create('image.jpg', callback);
+function callback(image, meta){
+    img = image;
+    met = meta;
+  }
+}
+function base64callback(result, meta){
+      b64res = result;
+      b64met = meta;
+  }
+function imagecallback(result, meta){
+      ires = result;
+      imet = meta;
+}
+function canvascallback(result, meta){
+      cres = result;
+      cmet = meta;
+}
+
+</script>
+</body>
+</html>
