@@ -6,23 +6,13 @@ class GlimpseTest(unittest.TestCase):
     def script(self, script):
         return self.driver.execute_script(script)
 
-    def is_available(self, tag):
-        try:
-            self.driver.find_element_by_tag_name(tag)
-            return True
-        except:
-            time.sleep(.25)
-            return False
-
     def find(self, tag):
-        while True:
-            if self.is_available(tag):
-                return self.driver.find_element_by_tag_name(tag)
-                break
+        return self.driver.find_element_by_tag_name(tag)
 
     @classmethod
     def setUpClass(self):
         self.driver = webdriver.Chrome()
+        #self.driver = webdriver.Firefox()
         self.driver.get('http://localhost:8000')
 
     @classmethod
@@ -30,6 +20,7 @@ class GlimpseTest(unittest.TestCase):
         self.driver.quit()
 
     def test_title(self):
+        self.driver.implicitly_wait(5)
         self.assertEqual(self.driver.title, 'Test Server')
         self.assertEqual(self.find('h1').text, "Python Server")
 
