@@ -3,8 +3,6 @@ Set up
 Make sure that you have Python 2.7 installed
 
 
-Ensure that all the private methods are exposed in glimpse.js
-
 Navigate to this folder
 
 Start the Server, this will take up one bash tab or dos window
